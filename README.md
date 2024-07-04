@@ -1,81 +1,49 @@
-# Node.js Apollo Starter Template
+# Node Apollo Starter
 
-Welcome to the Node.js Apollo Starter Template! This template provides a basic setup for a Node.js application using Apollo Server and GraphQL. It's designed to help you get up and running quickly with a simple, yet powerful, server-side application.
+This is a sample Node.js application that integrates GraphQL with Apollo Server and uses Permit.io for authorization. The application provides a simple task management system with CRUD operations.
 
 ## Features
 
-- **Apollo Server**: A fully-featured GraphQL server with a focus on easy setup and performance.
-- **GraphQL**: A query language for your API, and a runtime for executing those queries by using a type system you define for your data.
-- **Nodemon**: Automatically restarts the server when file changes in the directory are detected.
-- **Environment Variables**: Uses `dotenv` to manage environment variables.
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v18 or higher recommended)
-- npm (v6 or higher recommended)
-
-### Installation
-
-1. **Clone the repository**:
-    ```bash
-    git clone https://github.com/Arindam200/node-apollo-starter.git
-    cd node-apollo-starter
-    ```
-
-2. **Install dependencies**:
-    ```bash
-    npm install
-    ```
-
-3. **Create a `.env` file**:
-
-    Create a `.env` file in the root directory to manage your environment variables.
-
-### Running the Application
-
-To start the server, run the following command:
-
-```bash
-npm start
-```
-
-This will start the server using `nodemon`, which will watch for any changes in your files and automatically restart the server.
-
-### Example Query
-
-The template includes a basic GraphQL query that responds with "Hello, world!" when accessed:
-
-```graphql
-query {
-  hello
-}
-```
+- GraphQL API with Apollo Server
+- Permit.io for authorization
+- Task management with CRUD operations
 
 ## Project Structure
 
-```
-node-express-starter/
-├── src/
-│   └── index.js
-├── .gitignore
-├── package.json
-└── README.md
-```
+- `src/models/task.js`: Contains the task data model.
+- `src/resolvers/taskResolvers.js`: Contains the GraphQL resolvers for task operations.
+- `src/index.js`: Entry point of the application.
 
-- **src/index.js**: The main entry point of the application. It sets up the Apollo Server and defines a basic GraphQL schema and resolver.
-- **.gitignore**: Specifies files and directories to be ignored by Git.
-- **package.json**: Contains metadata about the project and lists the dependencies.
+## GraphQL Schema
 
-### Available Scripts
+The application provides the following GraphQL operations:
 
-- **start**: Starts the server using `nodemon`.
+### Queries
 
-## Contributing
+- `tasks`: Fetch all tasks.
+- `task(id: String!)`: Fetch a task by its ID.
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+### Mutations
 
-## License
+- `createTask(title: String!, description: String!)`: Create a new task.
+- `updateTask(id: String!, title: String, description: String)`: Update an existing task.
+- `deleteTask(id: String!)`: Delete a task by its ID.
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+## Authorization
+
+The application uses Permit.io for authorization. Each operation checks the user's permissions before proceeding. The permissions are defined as follows:
+
+- `read`: Required to fetch tasks.
+- `create`: Required to create a new task.
+- `update`: Required to update an existing task.
+- `delete`: Required to delete a task.
+
+## Dependencies
+
+- `@apollo/server`: Apollo Server for GraphQL.
+- `dotenv`: Loads environment variables from a `.env` file.
+- `graphql`: GraphQL library.
+- `graphql-tag`: Library for parsing GraphQL queries.
+- `nodemon`: Utility that automatically restarts the server on file changes.
+- `permitio`: Permit.io library for authorization.
+
